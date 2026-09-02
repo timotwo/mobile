@@ -9,7 +9,7 @@ export default function ConfigScreen({ navigation }) {
         Configurações
       </Text>
 
-      <SomarTexto />
+      
 
       <Pressable
         style={styles.botao}

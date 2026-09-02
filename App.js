@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './screens/HomeScreen';
-import ConfigScreen1 from './screens/ConfigScreen1';
+import ConfigScreen from './screens/ConfigScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,12 +13,12 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ title: 'Minhas Músicas' }}
+          options={{ title: 'msc' }}
         />
 
         <Stack.Screen
           name="Config"
-          component={ConfigScreen1}
+          component={ConfigScreen}
           options={{ title: 'Configurações' }}
         />
       </Stack.Navigator>

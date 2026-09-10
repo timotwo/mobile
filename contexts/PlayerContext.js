@@ -4,7 +4,7 @@ import * as MediaLibrary from 'expo-media-library/legacy';
 import MusicInfo from 'expo-music-info-2';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DURACAO_MINIMA_SEGUNDOS = 48;
+const DURACAO_MINIMA_SEGUNDOS = 53
 const PlayerContext = createContext(null);
 
 function corrigirPictureData(pictureData) {
@@ -53,6 +53,7 @@ export function PlayerProvider({ children }) {
   const [playlists, setPlaylists] = useState([]);
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
 
+
   const player = useAudioPlayer(null);
   const status = useAudioPlayerStatus(player);
   const jaAvancou = useRef(false);
@@ -88,6 +89,8 @@ export function PlayerProvider({ children }) {
     let permissao = permissionResponse;
     if (!permissao?.granted) permissao = await requestPermission();
     if (!permissao.granted) { setCarregando(false); return; }
+
+
 
     let todasAsMusicas = [];
     let pagina = await MediaLibrary.getAssetsAsync({ mediaType: 'audio', first: 200 });
@@ -125,6 +128,7 @@ export function PlayerProvider({ children }) {
     }
   }
 
+
   function criarPlaylist(nome) {
     if (!nome.trim()) return;
     salvarPlaylists([...playlists, { id: Date.now().toString(), nome: nome.trim(), musicas: [] }]);
@@ -151,6 +155,7 @@ export function PlayerProvider({ children }) {
       })
     );
   }
+
 
   async function buscarCapa(item) {
     try {
@@ -196,6 +201,7 @@ export function PlayerProvider({ children }) {
     const anteriorIndice = (indiceNaFila - 1 + filaAtual.length) % filaAtual.length;
     tocarMusica(filaAtual[anteriorIndice], filaAtual);
   }
+
 
   return (
     <PlayerContext.Provider

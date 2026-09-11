@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 
   capaVazia: { backgroundColor: '#df3a3a',},
 
-  nome: {  color: '#fff',  fontSize: 20,  fontWeight: '600',  textAlign: 'center', marginBottom: 24, },
+  nome: {  color: '#fff',  fontSize: 20,  fontWeight: '600',  textAlign: 'center', marginBottom: 24, fontFamily: 'SpaceGrotesk_700Bold', },
 
   slider: {  width: '100%',  height: 24,  marginBottom: 24,  },
 

@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   paddingVertical: 16, paddingHorizontal: 24,
   borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#222' },
 
-  nomeMusica: { color: '#ccc', fontSize: 15, flex: 1, marginRight: 12 },
+  nomeMusica: { color: '#ccc', fontSize: 15, flex: 1, marginRight: 12, fontFamily: 'SpaceGrotesk_400Regular',},
 
   nomeMusicaAtiva: { color: '#a3a3a3', fontWeight: '600' },
 

@@ -47,9 +47,9 @@ const styles = StyleSheet.create({
 
   playerLinha: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
 
-  playerNome: { color: '#fff', fontSize: 14, flex: 1, marginRight: 12 },
+  playerNome: { color: '#fff', fontSize: 14, flex: 1, marginRight: 12, fontFamily: 'SpaceGrotesk_700Bold', },
 
   playerControles: { flexDirection: 'row', alignItems: 'center', alignSelf: 'center' },
   
-  playerIcone: { color: '#fff', fontSize: 20 },
+  playerIcone: { color: '#fff', fontSize: 20, fontFamily: 'SpaceGrotesk_700Bold',},
 });

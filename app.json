@@ -10,7 +10,10 @@
       "supportsTablet": true
     },
     "android": {
-      "permissions": ["READ_MEDIA_AUDIO", "READ_EXTERNAL_STORAGE"],
+      "permissions": [
+        "READ_MEDIA_AUDIO",
+        "READ_EXTERNAL_STORAGE"
+      ],
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -23,7 +26,8 @@
     },
     "plugins": [
       "expo-audio",
-      "expo-asset"
+      "expo-asset",
+      "expo-font"
     ]
   }
 }

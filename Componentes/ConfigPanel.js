@@ -14,7 +14,7 @@ export default function ConfigScreen() {
 
 const styles = StyleSheet.create({
 
-  container: { flex: 1, backgroundColor: '#584141',},
+  container: { flex: 1, },
 
   texto: {color: '#fff', fontSize: 24, fontWeight: 'bold', textAlign: 'center', marginTop: 20, },
 

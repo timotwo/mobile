@@ -53,6 +53,10 @@ export default function ListaMusicas() {
   );
 }
 
+
+
+
+
 const styles = StyleSheet.create({
   permissaoBotao: { marginHorizontal: 24, marginBottom: 16, paddingVertical: 14,
   borderRadius: 10, backgroundColor: '#1a1a1a', alignItems: 'center' },
@@ -63,11 +67,11 @@ const styles = StyleSheet.create({
   paddingVertical: 16, paddingHorizontal: 24,
   borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: '#222' },
 
-  nomeMusica: { color: '#ccc', fontSize: 15, flex: 1, marginRight: 12, fontFamily: 'SpaceGrotesk_400Regular',},
+  nomeMusica: { color: '#050505', fontSize: 15, flex: 1, marginRight: 12, fontFamily: 'SpaceGrotesk_700Bold',},
 
-  nomeMusicaAtiva: { color: '#a3a3a3', fontWeight: '600' },
+  nomeMusicaAtiva: {  fontFamily: 'SpaceGrotesk_700Bold',  },
 
-  iconePlay: { color: '#888', fontSize: 14 },
+  iconePlay: { color: '#b7f69a', fontSize: 14 },
   
   vazio: { color: '#666', fontSize: 14, textAlign: 'center', marginTop: 40 },
 });

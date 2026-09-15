@@ -19,7 +19,7 @@ export default function HomeScreen() {
       </View>
 
       <LinearGradient
-        colors={['#1b364e', '#0f1437']}
+        colors={['#a0b27d', '#2f613e']}
         start=  {{ x: 0, y: 0 }}
         end={{x: 0.7, y: 0}}
         style={styles.ccontainer}
@@ -33,7 +33,7 @@ export default function HomeScreen() {
         </View>
 
         <View style={styles.header}>
-          <Text style={styles.titulo}>Msc</Text>
+          <Text style={styles.titulo}>MSC WOW</Text>
           <Text style={styles.subtitulo}>
             {carregando ? 'Carregando...' : `${musicas.length} musicas`}
           </Text>
@@ -51,6 +51,12 @@ export default function HomeScreen() {
 
         <MiniPlayer onPress={() => setAbaAtiva('player')} />
       </LinearGradient>
+
+
+
+
+
+      
     </View>
   );
 }
@@ -64,17 +70,18 @@ const styles = StyleSheet.create({
 
   headerr: { backgroundColor: '#f2ecec', padding: 16, alignItems: 'center', justifyContent: 'center' },
 
-  header: { flex: 0, backgroundColor: '#0f1437' },
+  header: { flex: 6, backgroundColor: '#2f613e' },
 
-  titulo: { color: '#ff0000', fontSize: 28, fontWeight: '600', fontFamily: 'SpaceGrotesk_700Bold', },
+  titulo: { color: '#2bea81', fontSize: 28, fontWeight: '600', fontFamily: 'SpaceGrotesk_700Bold', textAlign: 'center', marginTop: 10, },
 
-  subtitulo: { color: '#fff8f8', fontSize: 14, marginTop: 4, fontFamily: 'SpaceGrotesk_700Bold',},
+  subtitulo: { color: '#fff8f8', fontSize: 14, marginTop: 4, fontFamily: 'SpaceGrotesk_700Bold', textAlign: 'center', },
 
-  configBotao: { bottom: 0, left: 0, right: 0, paddingHorizontal: 20, borderRadius: 10,
-  paddingVertical: 16, alignItems: 'center', backgroundColor: '#053326',
+  configBotao: { width: '88%', bottom: 3, left: 3, right: 3, paddingHorizontal: 20, borderRadius: 13,
+  paddingVertical: 16, alignItems: 'center', justifyContent: 'center', backgroundColor: '#3d4951',
+
   alignSelf: 'center', gap: 10, marginTop: 78 },
 
-  configTexto: { color: '#58ce87', fontSize: 14, fontFamily: 'SpaceGrotesk_700Bold', textAlign: 'center' },
+  configTexto: { color: '#b0ffa4', fontSize: 14, fontFamily: 'SpaceGrotesk_700Bold', textAlign: 'center' },
 
   msc: { position: 'relative', flex: 19,  },
 

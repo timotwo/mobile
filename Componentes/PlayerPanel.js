@@ -24,7 +24,8 @@ export default function PlayerPanel() {
       {capaAtual ? (
         <Image source={{ uri: capaAtual }} style={styles.capa} />
       ) : (
-        <View style={[styles.capa, styles.capaVazia]} />
+        
+          <View style={[styles.capa, styles.capaVazia]} />
       )}
 
       <Text style={styles.nome} numberOfLines={2}>{musicaAtual.nome}</Text>
@@ -49,7 +50,7 @@ export default function PlayerPanel() {
       </View>
       <View style={styles.controles}>
         <Pressable onPress={musicaAnterior}><Text style={styles.icone}>⏮</Text></Pressable>
-        <Pressable onPress={() => alternarPlayPause(indiceAtual)}>
+        <Pressable onPress={() => alternarPlayPause(musicaAtual.id)}>
           <Text style={styles.icone}>{status.playing ? '▐▐' : '▶'}</Text>
         </Pressable>
         <Pressable onPress={proximaMusica}><Text style={styles.icone}>⏭</Text></Pressable>
@@ -63,19 +64,19 @@ const styles = StyleSheet.create({
 
   capa: { width: 220, height: 220, borderRadius: 16, alignSelf: 'center', marginBottom: 24, },
 
-  capaVazia: { backgroundColor: '#df3a3a',},
+  capaVazia: { backgroundColor: '#c7fa50',},
 
-  nome: {  color: '#fff',  fontSize: 20,  fontWeight: '600',  textAlign: 'center', marginBottom: 24, fontFamily: 'SpaceGrotesk_700Bold', },
+  nome: {  color: '#f4f9f1',  fontSize: 20,  fontWeight: '600',  textAlign: 'center', marginBottom: 24, fontFamily: 'SpaceGrotesk_700Bold', },
 
   slider: {  width: '100%',  height: 24,  marginBottom: 24,  },
 
   controles: {  flexDirection: 'row',  justifyContent: 'center',  gap: 40,},
 
 
-  icone: {  color: '#fff',  fontSize: 32, },
+  icone: {  color: '#f8f8f8',  fontSize: 32, },
 
   tempos: {flexDirection: 'row', justifyContent: 'space-between', width: '100%',
   },  
 
-  tempo: { color: '#888', fontSize: 12, },
+  tempo: { color: '#fafafa', fontSize: 12, },
 });

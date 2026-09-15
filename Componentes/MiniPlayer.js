@@ -2,6 +2,8 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { usePlayer } from '../contexts/PlayerContext';
 
+
+
 export default function MiniPlayer({ onPress }) {
   const { musicaAtual, status, player, proximaMusica, musicaAnterior, alternarPlayPause } = usePlayer();
 
@@ -15,9 +17,9 @@ export default function MiniPlayer({ onPress }) {
         minimumValue={0}
         maximumValue={status.duration || 1}
         value={status.currentTime}
-        minimumTrackTintColor="#3affad"
-        maximumTrackTintColor="#1b31d6"
-        thumbTintColor="#fafafa"
+        minimumTrackTintColor="#86bd5c"
+        maximumTrackTintColor="rgb(196, 255, 240)"
+        thumbTintColor="#f8f7f7"
         onSlidingComplete={(v) => player.seekTo(v)}
       />
       <View style={styles.playerLinha}>
@@ -38,14 +40,14 @@ export default function MiniPlayer({ onPress }) {
 }
 
 const styles = StyleSheet.create({
-  player: { position: 'absolute', bottom: 60, left: 0, right: 0,
-  backgroundColor: '#161616', paddingHorizontal: 50, paddingTop: 10,
-  borderRadius: 40, paddingBottom: 14, borderTopWidth: StyleSheet.hairlineWidth,
-  borderTopColor: '#2a2a2a' },
+  player: { width: '90%', position: 'absolute', bottom: 60, left: 21, right: 0,
+  backgroundColor: '#3d4951', paddingHorizontal: 50, paddingTop: 10,
+  borderRadius: 24, paddingBottom: 18,
+  },
 
   slider: { width: '100%', height: 24, marginBottom: 4 },
 
-  playerLinha: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  playerLinha: { flexDirection: 'row', marginTop: 6 },
 
   playerNome: { color: '#fff', fontSize: 14, flex: 1, marginRight: 12, fontFamily: 'SpaceGrotesk_700Bold', },
 
@@ -53,3 +55,7 @@ const styles = StyleSheet.create({
   
   playerIcone: { color: '#fff', fontSize: 20, fontFamily: 'SpaceGrotesk_700Bold',},
 });
+
+
+
+

@@ -91,7 +91,7 @@ export default function PlaylistPanel() {
         <Text style={styles.titulo}>{playlistSelecionada.nome}</Text>
 
         <Pressable style={styles.botao} onPress={() => { setMusicasSelecionadas([]); setAdicionandoMusicas(true); }}>
-          <Text style={styles.botaoTexto}>+ Adicionar músicas</Text>
+          <Text style={styles.botaoTexto}>+ Adicionar musicas</Text>
         </Pressable>
 
         {musicasDaPlaylist.length === 0 ? (
@@ -135,7 +135,7 @@ export default function PlaylistPanel() {
           <TextInput
             style={styles.input}
             placeholder="Nome da playlist"
-            placeholderTextColor="#666"
+            placeholderTextColor="#fffefe"
             value={nome}
             onChangeText={setNome}
             autoFocus
@@ -171,11 +171,11 @@ const styles = StyleSheet.create({
 
   titulo: { color: '#fff', fontSize: 24, fontWeight: '600', marginBottom: 15, fontFamily: 'SpaceGrotesk_700Bold',},
 
-  subtitulo: { color: '#888', marginBottom: 10, fontFamily: 'SpaceGrotesk_700Bold',},
+  subtitulo: { color: '#eeebeb', marginBottom: 10, fontFamily: 'SpaceGrotesk_700Bold',},
 
-  botao: { backgroundColor: '#2a1a1a', padding: 15, borderRadius: 10, alignItems: 'center', marginBottom: 15 },
+  botao: { backgroundColor: '#86bd5c', padding: 15, borderRadius: 10, alignItems: 'center', marginBottom: 15 },
 
-  botaoCriar: { backgroundColor: '#2a1a1a', padding: 15, borderRadius: 10, alignItems: 'center' },
+  botaoCriar: { backgroundColor: '#86bd5c', padding: 15, borderRadius: 10, alignItems: 'center' },
 
   botaoPlaylist: { flex: 1, padding: 5 },
 
@@ -183,32 +183,32 @@ const styles = StyleSheet.create({
 
   criacao: { marginBottom: 20 },
 
-  input: { backgroundColor: '#222', color: '#fff', padding: 15, borderRadius: 10, marginBottom: 10 },
+  input: { backgroundColor: '#6aa08d', color: '#fff', padding: 15, borderRadius: 10, marginBottom: 10 },
 
 
   playlist: {
-    backgroundColor: '#1b1b1b', padding: 18, borderRadius: 10, marginBottom: 10,
+    backgroundColor: '#3d4951', padding: 18, borderRadius: 10, marginBottom: 10,
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
   },
 
-  nomePlaylist: { color: '#fff', fontSize: 16, fontFamily: 'SpaceGrotesk_700Bold', },
+  nomePlaylist: { color: '#b0ffa4', fontSize: 16, fontFamily: 'SpaceGrotesk_700Bold', },
 
-  quantidade: { color: '#777', fontSize: 12, marginTop: 5 },
+  quantidade: { color: '#78ff7f', fontSize: 12, marginTop: 5 },
 
-  vazio: { color: '#888', fontSize: 14, fontFamily: 'SpaceGrotesk_700Bold', },
+  vazio: { color: '#d8d7d7', fontSize: 14, fontFamily: 'SpaceGrotesk_700Bold', },
 
   voltar: { marginBottom: 20 },
 
   voltarTexto: { color: '#fff', fontSize: 16, fontFamily: 'SpaceGrotesk_700Bold', },
 
   musica: {
-    backgroundColor: '#1b1b1b', padding: 16, borderRadius: 10, marginBottom: 8,
+    backgroundColor: '#3d4951', padding: 16, borderRadius: 10, marginBottom: 8,
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
   },
 
   musicaSelecionada: { borderWidth: 1, borderColor: '#fff' },
 
-  nomeMusica: { color: '#fff', fontSize: 15, flex: 1, fontFamily: 'SpaceGrotesk_400Regular', },
+  nomeMusica: { color: '#b0ffa4', fontSize: 15, flex: 1, fontFamily: 'SpaceGrotesk_700Bold', },
 
   nomeMusicaTocando: { fontWeight: 'bold' },
 
@@ -216,6 +216,6 @@ const styles = StyleSheet.create({
 
   iconePlay: { color: '#fff', fontSize: 18, marginLeft: 10 },
 
-  remover: { color: '#888', fontSize: 16, marginLeft: 10 },
+  remover: { color: '#fffcfc', fontSize: 16, marginLeft: 10 },
   
 });

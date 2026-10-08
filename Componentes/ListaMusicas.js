@@ -1,4 +1,5 @@
-import { Text, Pressable, FlatList, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { Text, Pressable, FlatList, StyleSheet, TextInput } from 'react-native';
 import { usePlayer } from '../contexts/PlayerContext';
 
 export default function ListaMusicas() {
@@ -13,21 +14,39 @@ export default function ListaMusicas() {
     status,
   } = usePlayer();
 
-  const filaCompleta = musicas.map((m) => m.id);
+  const [pesquisa, setPesquisa] = useState('');
+
+  const musicasFiltradas = musicas.filter((musica) =>
+    musica.nome.toLowerCase().includes(pesquisa.toLowerCase())
+  );
+
+  const filaCompleta = musicasFiltradas.map((m) => m.id);
 
   return (
     <>
       {!carregando && !permissionResponse?.granted && (
         <Pressable style={styles.permissaoBotao} onPress={carregarMusicas}>
-          <Text style={styles.permissaoTexto}>Permitir acesso aos arquivos</Text>
+          <Text style={styles.permissaoTexto}>
+            Permitir acesso aos arquivos
+          </Text>
         </Pressable>
       )}
+
+      <TextInput
+        style={styles.pesquisa}
+        placeholder="Pesquisar música                      👀"
+        placeholderTextColor="#87bda9"
+        value={pesquisa}
+        onChangeText={setPesquisa}
+      />
+
       <FlatList
-        data={musicas}
+        data={musicasFiltradas}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingBottom: musicaAtual ? 100 : 20 }}
         renderItem={({ item }) => {
           const ativa = estaTocando(item.id);
+
           return (
             <Pressable
               style={styles.musica}
@@ -39,6 +58,7 @@ export default function ListaMusicas() {
               >
                 {item.nome}
               </Text>
+
               <Text style={styles.iconePlay}>
                 {ativa && status.playing ? '▐▐' : '▶'}
               </Text>
@@ -46,16 +66,18 @@ export default function ListaMusicas() {
           );
         }}
         ListEmptyComponent={
-          !carregando && <Text style={styles.vazio}>nenhuma musica por aqui...</Text>
+          !carregando && (
+            <Text style={styles.vazio}>
+              {pesquisa
+                ? 'nenhuma música encontrada...'
+                : 'nenhuma musica por aqui...'}
+            </Text>
+          )
         }
       />
     </>
   );
 }
-
-
-
-
 
 const styles = StyleSheet.create({
   permissaoBotao: { marginHorizontal: 24, marginBottom: 16, paddingVertical: 14,
@@ -74,4 +96,21 @@ const styles = StyleSheet.create({
   iconePlay: { color: '#b7f69a', fontSize: 14 },
   
   vazio: { color: '#666', fontSize: 14, textAlign: 'center', marginTop: 40 },
+
+pesquisa: {
+  marginHorizontal: 24,
+  marginBottom: 19,
+  marginTop: 22,
+  paddingHorizontal: 16,
+  paddingVertical: 12,
+  borderRadius: 17,
+  backgroundColor: '#eef7e9',
+  color: '#111',
+  fontSize: 15,
+  fontFamily: 'SpaceGrotesk_700Bold',
+  borderWidth: 1,
+  borderColor: '#86bd5c',
+},
+
+
 });

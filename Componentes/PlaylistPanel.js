@@ -20,8 +20,10 @@ export default function PlaylistPanel() {
   const [playlistSelecionadaId, setPlaylistSelecionadaId] = useState(null);
   const [adicionandoMusicas, setAdicionandoMusicas] = useState(false);
   const [musicasSelecionadas, setMusicasSelecionadas] = useState([]);
+  const [pesquisa, setPesquisa] = useState('');
 
-  const playlistSelecionada = playlists.find((p) => p.id === playlistSelecionadaId) ?? null;
+  const playlistSelecionada =
+    playlists.find((p) => p.id === playlistSelecionadaId) ?? null;
 
   function handleCriarPlaylist() {
     criarPlaylist(nome);
@@ -31,87 +33,183 @@ export default function PlaylistPanel() {
 
   function alternarMusica(id) {
     setMusicasSelecionadas((anteriores) =>
-      anteriores.includes(id) ? anteriores.filter((musicaId) => musicaId !== id) : [...anteriores, id]
+      anteriores.includes(id)
+        ? anteriores.filter((musicaId) => musicaId !== id)
+        : [...anteriores, id]
     );
   }
 
   function handleAdicionarMusicas() {
-    adicionarMusicasNaPlaylist(playlistSelecionadaId, musicasSelecionadas);
+    adicionarMusicasNaPlaylist(
+      playlistSelecionadaId,
+      musicasSelecionadas
+    );
     setMusicasSelecionadas([]);
     setAdicionandoMusicas(false);
+    setPesquisa('');
   }
 
-  
+  const musicasFiltradas = musicas.filter((musica) =>
+    musica.nome.toLowerCase().includes(pesquisa.toLowerCase())
+  );
+
   if (playlistSelecionada && adicionandoMusicas) {
     return (
       <View style={styles.container}>
-        <Pressable style={styles.voltar} onPress={() => { setAdicionandoMusicas(false); setMusicasSelecionadas([]); }}>
+        <Pressable
+          style={styles.voltar}
+          onPress={() => {
+            setAdicionandoMusicas(false);
+            setMusicasSelecionadas([]);
+            setPesquisa('');
+          }}
+        >
           <Text style={styles.voltarTexto}>← Voltar</Text>
         </Pressable>
 
         <Text style={styles.titulo}>Adicionar musicas</Text>
 
-        <Pressable style={styles.botao} onPress={handleAdicionarMusicas}>
-          <Text style={styles.botaoTexto}>Adicionar selecionadas</Text>
+        <TextInput
+          style={styles.pesquisa}
+          placeholder="Pesquisar música          👀"
+          placeholderTextColor="#8fb7a8"
+          value={pesquisa}
+          onChangeText={setPesquisa}
+        />
+
+        <Pressable
+          style={styles.botao}
+          onPress={handleAdicionarMusicas}
+        >
+          <Text style={styles.botaoTexto}>
+            Adicionar selecionadas
+          </Text>
         </Pressable>
 
-        <Text style={styles.subtitulo}>{musicasSelecionadas.length} selecionada(s)</Text>
+        <Text style={styles.subtitulo}>
+          {musicasSelecionadas.length} selecionada(s)
+        </Text>
 
         <FlatList
-          data={musicas}
+          data={musicasFiltradas}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
-            const selecionada = musicasSelecionadas.includes(item.id);
+            const selecionada =
+              musicasSelecionadas.includes(item.id);
+
             return (
               <Pressable
-                style={[styles.musica, selecionada && styles.musicaSelecionada]}
+                style={[
+                  styles.musica,
+                  selecionada && styles.musicaSelecionada,
+                ]}
                 onPress={() => alternarMusica(item.id)}
               >
-                <Text style={styles.nomeMusica} numberOfLines={1}>{item.nome}</Text>
-                <Text style={styles.checkbox}>{selecionada ? '✓' : '○'}</Text>
+                <Text
+                  style={styles.nomeMusica}
+                  numberOfLines={1}
+                >
+                  {item.nome}
+                </Text>
+
+                <Text style={styles.checkbox}>
+                  {selecionada ? '✓' : '○'}
+                </Text>
               </Pressable>
             );
           }}
+          ListEmptyComponent={
+            <Text style={styles.vazio}>
+              Nenhuma música encontrada.
+            </Text>
+          }
         />
       </View>
     );
   }
 
-
   if (playlistSelecionada) {
-    const musicasDaPlaylist = musicas.filter((musica) => playlistSelecionada.musicas.includes(musica.id));
+    const musicasDaPlaylist = musicas.filter((musica) =>
+      playlistSelecionada.musicas.includes(musica.id)
+    );
+
     const filaDaPlaylist = musicasDaPlaylist.map((m) => m.id);
 
     return (
       <View style={styles.container}>
-        <Pressable style={styles.voltar} onPress={() => setPlaylistSelecionadaId(null)}>
+        <Pressable
+          style={styles.voltar}
+          onPress={() => setPlaylistSelecionadaId(null)}
+        >
           <Text style={styles.voltarTexto}>← Voltar</Text>
         </Pressable>
 
-        <Text style={styles.titulo}>{playlistSelecionada.nome}</Text>
+        <Text style={styles.titulo}>
+          {playlistSelecionada.nome}
+        </Text>
 
-        <Pressable style={styles.botao} onPress={() => { setMusicasSelecionadas([]); setAdicionandoMusicas(true); }}>
-          <Text style={styles.botaoTexto}>+ Adicionar musicas</Text>
+        <Pressable
+          style={styles.botao}
+          onPress={() => {
+            setMusicasSelecionadas([]);
+            setPesquisa('');
+            setAdicionandoMusicas(true);
+          }}
+        >
+          <Text style={styles.botaoTexto}>
+            + Adicionar musicas
+          </Text>
         </Pressable>
 
         {musicasDaPlaylist.length === 0 ? (
-          <Text style={styles.vazio}>Nenhuma musica nesta playlist.</Text>
+          <Text style={styles.vazio}>
+            Nenhuma musica nesta playlist.
+          </Text>
         ) : (
           <FlatList
             data={musicasDaPlaylist}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => {
-              const tocando = estaTocando(item.id) && status.playing;
+              const tocando =
+                estaTocando(item.id) && status.playing;
 
               return (
-                <Pressable style={styles.musica} onPress={() => alternarPlayPause(item.id, filaDaPlaylist)}>
-                  <Text style={[styles.nomeMusica, tocando && styles.nomeMusicaTocando]} numberOfLines={1}>
+                <Pressable
+                  style={styles.musica}
+                  onPress={() =>
+                    alternarPlayPause(
+                      item.id,
+                      filaDaPlaylist
+                    )
+                  }
+                >
+                  <Text
+                    style={[
+                      styles.nomeMusica,
+                      tocando && styles.nomeMusicaTocando,
+                    ]}
+                    numberOfLines={1}
+                  >
                     {item.nome}
                   </Text>
-                  <Pressable onPress={() => removerMusicaDaPlaylist(playlistSelecionada.id, item.id)} hitSlop={10}>
-                    <Text style={styles.remover}>✕</Text>
+
+                  <Pressable
+                    onPress={() =>
+                      removerMusicaDaPlaylist(
+                        playlistSelecionada.id,
+                        item.id
+                      )
+                    }
+                    hitSlop={10}
+                  >
+                    <Text style={styles.remover}>
+                      ✕
+                    </Text>
                   </Pressable>
-                  <Text style={styles.iconePlay}>{tocando ? '▐▐' : '▶'}</Text>
+
+                  <Text style={styles.iconePlay}>
+                    {tocando ? '▐▐' : '▶'}
+                  </Text>
                 </Pressable>
               );
             }}
@@ -121,13 +219,17 @@ export default function PlaylistPanel() {
     );
   }
 
-  
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Playlists</Text>
 
-      <Pressable style={styles.botao} onPress={() => setCriando(true)}>
-        <Text style={styles.botaoTexto}>+ Nova playlist</Text>
+      <Pressable
+        style={styles.botao}
+        onPress={() => setCriando(true)}
+      >
+        <Text style={styles.botaoTexto}>
+          + Nova playlist
+        </Text>
       </Pressable>
 
       {criando && (
@@ -140,8 +242,14 @@ export default function PlaylistPanel() {
             onChangeText={setNome}
             autoFocus
           />
-          <Pressable style={styles.botaoCriar} onPress={handleCriarPlaylist}>
-            <Text style={styles.botaoTexto}>Criar</Text>
+
+          <Pressable
+            style={styles.botaoCriar}
+            onPress={handleCriarPlaylist}
+          >
+            <Text style={styles.botaoTexto}>
+              Criar
+            </Text>
           </Pressable>
         </View>
       )}
@@ -151,16 +259,38 @@ export default function PlaylistPanel() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View style={styles.playlist}>
-            <Pressable style={styles.botaoPlaylist} onPress={() => setPlaylistSelecionadaId(item.id)}>
-              <Text style={styles.nomePlaylist}>{item.nome}</Text>
-              <Text style={styles.quantidade}>{item.musicas.length} músicas</Text>
+            <Pressable
+              style={styles.botaoPlaylist}
+              onPress={() =>
+                setPlaylistSelecionadaId(item.id)
+              }
+            >
+              <Text style={styles.nomePlaylist}>
+                {item.nome}
+              </Text>
+
+              <Text style={styles.quantidade}>
+                {item.musicas.length} músicas
+              </Text>
             </Pressable>
-            <Pressable onPress={() => excluirPlaylist(item.id)} hitSlop={10}>
-              <Text style={styles.remover}>✕</Text>
+
+            <Pressable
+              onPress={() => excluirPlaylist(item.id)}
+              hitSlop={10}
+            >
+              <Text style={styles.remover}>
+                ✕
+              </Text>
             </Pressable>
           </View>
         )}
-        ListEmptyComponent={!criando && <Text style={styles.vazio}>Nenhuma playlist criada ainda.</Text>}
+        ListEmptyComponent={
+          !criando && (
+            <Text style={styles.vazio}>
+              Nenhuma playlist criada ainda.
+            </Text>
+          )
+        }
       />
     </View>
   );
@@ -217,5 +347,18 @@ const styles = StyleSheet.create({
   iconePlay: { color: '#fff', fontSize: 18, marginLeft: 10 },
 
   remover: { color: '#fffcfc', fontSize: 16, marginLeft: 10 },
-  
+  pesquisa: {
+  marginHorizontal: 24,
+  marginBottom: 19,
+  marginTop: 7,
+  paddingHorizontal: 16,
+  paddingVertical: 12,
+  borderRadius: 17,
+  backgroundColor: '#eef7e9',
+  color: '#111',
+  fontSize: 15,
+  fontFamily: 'SpaceGrotesk_700Bold',
+  borderWidth: 1,
+  borderColor: '#86bd5c',
+},
 });
